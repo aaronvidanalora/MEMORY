@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.girando {
+    transition: transform 0.5s ease; /* Agrega una transición suave para la rotación */
+    transform: rotateY(360deg); /* Rota la tarjeta 180 grados en el eje Y */
+  }
+  
