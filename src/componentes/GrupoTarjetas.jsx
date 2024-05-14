@@ -10,8 +10,8 @@ import Clicks from "../componentes/Clicks";
 
 
 export default function GrupoTarjeta({ tarjetas }) {
-    const [primerClick, setPrimerClick] = useState(null);
-    const [tarjetasGiradas, setTarjetasGiradas] = useState([]);
+    const [giro1, setGiro1] = useState(null);
+    const [estanGiradas, setestanGiradas] = useState([]);
     const [idCoincidentes, setIdCoincidentes] = useState([]);
     const [tiempoRestante, setTiempoRestante] = useState(20); // Tiempo inicial
     const [puntuacion, setPuntuacion] = useState(0);
@@ -46,27 +46,27 @@ export default function GrupoTarjeta({ tarjetas }) {
     const handleCardClick = (id, estado) => {
         if (bloquearClick || estado) return; // Bloquear clics si está activado el bloqueo o si la carta ya está girada
 
-        if (primerClick === null) {
-            const primeraCarta = tarjetas.find(tarjeta => tarjeta.id === id);
-            primeraCarta.estado = true;
-            setPrimerClick(id);
+        if (giro1 === null) {
+            const primero = tarjetas.find(tarjeta => tarjeta.id === id);
+            primero.estado = true;
+            setGiro1(id);
         } else {
-            const segundaCarta = tarjetas.find(tarjeta => tarjeta.id === id);
-            segundaCarta.estado = true;
-            setTarjetasGiradas([...tarjetasGiradas, primerClick, id]);
+            const segundo = tarjetas.find(tarjeta => tarjeta.id === id);
+            segundo.estado = true;
+            setestanGiradas([...estanGiradas, giro1, id]);
 
-            compararCartas(primerClick, id);
-            setPrimerClick(null);
+            verificarCarta(giro1, id);
+            setGiro1(null);
             setBloquearClick(true); // Bloquear clics después de girar dos cartas
         }
     };
 
-    const compararCartas = (primerClick, segundoClick) => {
-        const primeraCarta = tarjetas.find(tarjeta => tarjeta.id === primerClick);
-        const segundaCarta = tarjetas.find(tarjeta => tarjeta.id === segundoClick);
+    const verificarCarta = (giro1, Giro2) => {
+        const primero = tarjetas.find(tarjeta => tarjeta.id === giro1);
+        const segundo = tarjetas.find(tarjeta => tarjeta.id === Giro2);
 
-        if (primeraCarta.idPokemon === segundaCarta.idPokemon) {
-            setIdCoincidentes([...idCoincidentes, primerClick, segundoClick]);
+        if (primero.idPokemon === segundo.idPokemon) {
+            setIdCoincidentes([...idCoincidentes, giro1, Giro2]);
             // Incrementar la puntuación
             setPuntuacion(prevPuntuacion => prevPuntuacion + 1);
             setTimeout(() => {
@@ -77,10 +77,10 @@ export default function GrupoTarjeta({ tarjetas }) {
             }
         } else {
             setTimeout(() => {
-                primeraCarta.estado = false;
-                segundaCarta.estado = false;
+                primero.estado = false;
+                segundo.estado = false;
                 // Actualizar el estado de las tarjetas para que se muestren como giradas
-                setTarjetasGiradas([]);
+                setestanGiradas([]);
                 setBloquearClick(false); // Desbloquear clics si las cartas no coinciden
             }, 1000); // Girar las tarjetas no coincidentes después de 1 segundo
         }
