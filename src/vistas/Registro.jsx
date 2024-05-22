@@ -14,7 +14,7 @@ function Registro() {
   const handleSubmit = async (event) => {
     try {
       event.preventDefault();
-      // Aquí puedes manejar la lógica para enviar los datos del formulario
+     
       console.log('Nombre:', nombre);
       console.log('Correo:', correo);
       console.log('Contraseña:', contraseña);
