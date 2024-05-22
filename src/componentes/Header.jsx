@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 import { useAuth } from "./Context";
 
 export default function Header() {
-  const { logged, user, logout } = useAuth(); // Obtén el estado logged, la información del usuario y la función logout del contexto de autenticación
+  const { logged, user, logout } = useAuth(); 
   const handleLogout = () => {
-    // Llama a la función logout al hacer clic en el botón de cerrar sesión
+   
     logout();
   };
 
