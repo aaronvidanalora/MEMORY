@@ -95,10 +95,10 @@ export default function GrupoTarjeta({ tarjetas }) {
     
             const { data: partida, error } = await supabase.from('partidas').insert([
                 { 
-                    nombre: correo, // Cambiado de 'user.email' a 'correo'
-                    fecha: new Date().toISOString().split('T')[0], // Formato de fecha: 'YYYY-MM-DD'
-                    hora: new Date().toLocaleTimeString([], {hour12: false}), // Formato de hora: 'HH:MM:SS'
-                    puntos: puntuacion // Puntos obtenidos en el juego
+                    nombre: correo, 
+                    fecha: new Date().toISOString().split('T')[0], 
+                    hora: new Date().toLocaleTimeString([], {hour12: false}), 
+                    puntos: puntuacion 
                 }
             ]);
     
@@ -108,7 +108,7 @@ export default function GrupoTarjeta({ tarjetas }) {
     
             console.log('Partida guardada exitosamente:', partida);
             setTimeout(() => {
-                navigate('/ranking'); // Redirige a /ranking después de 1 segundo
+                navigate('/ranking'); 
             }, 1000);
         } catch (error) {
             console.error('Error al guardar la partida:', error.message);
